@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: scos-ball-detector
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: HF_MODEL_REPO
+        value: ""
+      - key: MODEL_FILENAME
+        value: best.pt
+      - key: CONFIDENCE_DEFAULT
+        value: "0.25"
+      - key: IOU_THRESHOLD
+        value: "0.45"
+      - key: IMGSZ
+        value: "640"

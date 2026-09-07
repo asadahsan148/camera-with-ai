@@ -29,6 +29,9 @@ const FRAME_START_MIN_REDS = 10;
 const FRAME_START_MIN_COLORS = 4;
 const FRAME_START_MIN_TOTAL = 18;
 const FRAME_END_MAX_BALLS = 1;
+// Fallback for generic ball detectors (COCO "sports ball" — no color info)
+const FRAME_START_GENERIC_MIN = 15;
+const FRAME_END_GENERIC_MAX = 1;
 
 export const FRAME_STATES = {
   IDLE: 'IDLE',
@@ -292,11 +295,24 @@ export class FrameStateManager extends EventEmitter {
       (countsByClass.brown || 0) + (countsByClass.blue || 0) +
       (countsByClass.pink || 0) + (countsByClass.black || 0);
     const hasCueBall = (countsByClass.cue_ball || 0) > 0;
+    const genericBalls = countsByClass.ball || 0;
+
+    // Use color-specific detection if available, otherwise fall back to generic ball count
+    const hasColorInfo = redCount > 0 || colorCount > 0;
+    const effectiveTotal = hasColorInfo ? totalBalls : Math.max(totalBalls, genericBalls);
+
+    const isFrameStart = hasColorInfo
+      ? (redCount >= FRAME_START_MIN_REDS && colorCount >= FRAME_START_MIN_COLORS &&
+         totalBalls >= FRAME_START_MIN_TOTAL)
+      : (effectiveTotal >= FRAME_START_GENERIC_MIN);
+
+    const isFrameEnd = hasColorInfo
+      ? (totalBalls <= FRAME_END_MAX_BALLS)
+      : (effectiveTotal <= FRAME_END_GENERIC_MAX);
 
     switch (monitor.state) {
       case FRAME_STATES.IDLE:
-        if (redCount >= FRAME_START_MIN_REDS && colorCount >= FRAME_START_MIN_COLORS &&
-            totalBalls >= FRAME_START_MIN_TOTAL) {
+        if (isFrameStart) {
           monitor.startConfirmations += 1;
           monitor.endConfirmations = 0;
           if (monitor.startConfirmations >= monitor.confirmCount) {
@@ -310,9 +326,9 @@ export class FrameStateManager extends EventEmitter {
               cameraId: monitor.cameraId,
               cameraName: monitor.cameraName,
               frameNumber: monitor.frameCount,
-              ballCount: totalBalls,
+              ballCount: effectiveTotal,
               countsByClass,
-              message: `Frame ${monitor.frameCount} started — ${totalBalls} balls detected`,
+              message: `Frame ${monitor.frameCount} started — ${effectiveTotal} balls detected`,
             });
           }
         } else {
@@ -326,7 +342,7 @@ export class FrameStateManager extends EventEmitter {
         break;
 
       case FRAME_STATES.IN_FRAME:
-        if (totalBalls <= FRAME_END_MAX_BALLS) {
+        if (isFrameEnd) {
           monitor.endConfirmations += 1;
           monitor.startConfirmations = 0;
           if (monitor.endConfirmations >= monitor.confirmCount) {
@@ -338,16 +354,14 @@ export class FrameStateManager extends EventEmitter {
               cameraId: monitor.cameraId,
               cameraName: monitor.cameraName,
               frameNumber: monitor.frameCount,
-              ballCount: totalBalls,
+              ballCount: effectiveTotal,
               message: `Frame ${monitor.frameCount} ended — table cleared`,
             });
           }
         } else {
           monitor.endConfirmations = 0;
           // Check for new frame start (re-rack)
-          if (redCount >= FRAME_START_MIN_REDS && colorCount >= FRAME_START_MIN_COLORS &&
-              totalBalls >= FRAME_START_MIN_TOTAL) {
-            // Table re-racked — new frame within same visit
+          if (isFrameStart) {
             monitor.frameCount += 1;
             monitor.state = FRAME_STATES.FRAME_START;
             this.pushEvent({
@@ -357,9 +371,9 @@ export class FrameStateManager extends EventEmitter {
               cameraId: monitor.cameraId,
               cameraName: monitor.cameraName,
               frameNumber: monitor.frameCount,
-              ballCount: totalBalls,
+              ballCount: effectiveTotal,
               countsByClass,
-              message: `Frame ${monitor.frameCount} started (re-rack) — ${totalBalls} balls detected`,
+              message: `Frame ${monitor.frameCount} started (re-rack) — ${effectiveTotal} balls detected`,
             });
           }
         }
@@ -370,8 +384,7 @@ export class FrameStateManager extends EventEmitter {
         monitor.state = FRAME_STATES.IDLE;
         monitor.endConfirmations = 0;
         // Check if a new frame is already starting
-        if (redCount >= FRAME_START_MIN_REDS && colorCount >= FRAME_START_MIN_COLORS &&
-            totalBalls >= FRAME_START_MIN_TOTAL) {
+        if (isFrameStart) {
           monitor.startConfirmations = 1;
         }
         break;

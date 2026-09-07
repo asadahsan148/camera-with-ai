@@ -28,7 +28,7 @@ from ultralytics import YOLO
 
 # --- Configuration ---------------------------------------------------------
 
-HF_MODEL_REPO = os.environ.get("HF_MODEL_REPO", "your-username/scos-yolov8s")
+HF_MODEL_REPO = os.environ.get("HF_MODEL_REPO", "")  # Empty = use COCO pre-trained
 MODEL_FILENAME = os.environ.get("MODEL_FILENAME", "best.pt")
 CONFIDENCE_DEFAULT = float(os.environ.get("CONFIDENCE_DEFAULT", "0.25"))
 IOU_THRESHOLD = float(os.environ.get("IOU_THRESHOLD", "0.45"))
@@ -72,11 +72,16 @@ def get_model() -> YOLO:
         return _model
 
     t0 = time.perf_counter()
-    model_path = hf_hub_download(repo_id=HF_MODEL_REPO, filename=MODEL_FILENAME)
-    _model = YOLO(model_path)
+    if HF_MODEL_REPO:
+        model_path = hf_hub_download(repo_id=HF_MODEL_REPO, filename=MODEL_FILENAME)
+        _model = YOLO(model_path)
+    else:
+        print("[scos] No HF_MODEL_REPO set — using COCO pre-trained yolov8n.pt")
+        _model = YOLO("yolov8n.pt")  # auto-downloads from ultralytics
     _model_names = dict(enumerate(_model.names.values())) if _model.names else {}
     load_ms = (time.perf_counter() - t0) * 1000
-    print(f"[scos] Model loaded from {HF_MODEL_REPO}/{MODEL_FILENAME} in {load_ms:.0f}ms")
+    src = f"{HF_MODEL_REPO}/{MODEL_FILENAME}" if HF_MODEL_REPO else "COCO yolov8n.pt"
+    print(f"[scos] Model loaded from {src} in {load_ms:.0f}ms")
     print(f"[scos] Model classes: {_model_names}")
     return _model
 
@@ -92,6 +97,7 @@ def normalize_class(cls_id: int, raw_name: str) -> str:
         "red": "red", "reds": "red",
         "yellow": "yellow", "green": "green", "brown": "brown",
         "blue": "blue", "pink": "pink", "black": "black",
+        "sports ball": "ball", "ball": "ball",
     }
     if raw_lower in aliases:
         return aliases[raw_lower]
