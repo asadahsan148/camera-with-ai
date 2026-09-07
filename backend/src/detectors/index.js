@@ -1,8 +1,10 @@
 import { RoboflowSnookerDetector } from './RoboflowSnookerDetector.js';
+import { HFDetector } from './HFDetector.js';
 
 /** Registry of interchangeable pretrained / future detectors. */
 const DETECTORS = {
   'roboflow-snooker': () => new RoboflowSnookerDetector(),
+  'hf-space': () => new HFDetector(),
 };
 
 export function listDetectors() {
@@ -22,4 +24,4 @@ export function getDetector(id = 'roboflow-snooker') {
   return factory();
 }
 
-export { RoboflowSnookerDetector };
+export { RoboflowSnookerDetector, HFDetector };

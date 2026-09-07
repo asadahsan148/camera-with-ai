@@ -14,6 +14,8 @@ import { AiMonitor } from './aiMonitor.js';
 import { createCalibrationRouter } from './calibrationRoutes.js';
 import { createDatasetRouter } from './datasetRoutes.js';
 import { createModelTestRouter } from './modelTestRoutes.js';
+import { createAutoCalibrationRouter } from './autoCalibrationRoutes.js';
+import { createFrameStateRouter } from './frameStateRoutes.js';
 import { TableStore } from './tableStore.js';
 import { FrameSource } from './frameSource.js';
 import { ensureLocalCredentials, loadLocalCredentials, saveLocalCredentials } from './localCredentials.js';
@@ -64,6 +66,20 @@ const modelTestRouter = createModelTestRouter({
   frames: frameSource,
 });
 app.use('/api', modelTestRouter);
+
+const autoCalibrationRouter = createAutoCalibrationRouter({
+  ...cameraAccess,
+  store: tableStore,
+  frames: frameSource,
+});
+app.use('/api/auto-calibrate', autoCalibrationRouter);
+
+const frameStateRouter = createFrameStateRouter({
+  ...cameraAccess,
+  store: tableStore,
+  frames: frameSource,
+});
+app.use('/api/frame-state', frameStateRouter);
 
 function findExisting({ id, ip, channel }) {
   if (id && cameras.has(id)) return cameras.get(id);
@@ -656,6 +672,7 @@ process.on('SIGINT', () => {
   calibrationRouter.stopAll();
   datasetRouter.stopAll();
   modelTestRouter.stopAll();
+  frameStateRouter.stopAll();
   frameSource.stopAll();
   process.exit(0);
 });

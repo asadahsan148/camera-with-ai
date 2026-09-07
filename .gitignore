@@ -11,3 +11,19 @@ __pycache__/
 
 # HuggingFace download cache
 ai-worker/pool_dataset/.cache/
+
+# Corner dataset — extracted frames are large, regenerate with extract_frames.py
+# Keep: VideoForAI.mp4, annotations.json, labels/, annotate_corners.py, kaggle_train_corners.ipynb
+ai-worker/corner_dataset/frames/
+ai-worker/corner_dataset/augmented/
+ai-worker/corner_dataset/scos-corners-v2/
+ai-worker/corner_dataset/scos-corners-v2.zip
+
+# Model weights — download from HF Hub
+hf-space-corners/*.pt
+hf-space-corners/*.onnx
+hf-space/*.pt
+hf-space/*.onnx
+
+# Dataset snapshots
+backend/data/datasets/model-tests/

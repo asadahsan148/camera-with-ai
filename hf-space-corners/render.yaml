@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: scos-corner-detector
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: HF_MODEL_REPO
+        value: asadahsan148/scos-corner-detector
+      - key: MODEL_FILENAME
+        value: best.pt
+      - key: CONF_THRESHOLD
+        value: "0.25"
+      - key: IMGSZ
+        value: "640"
