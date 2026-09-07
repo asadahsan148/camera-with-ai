@@ -1,0 +1,13 @@
+{
+  "name": "wifi-cameras",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend && pip install -r ai-worker/requirements.txt",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:ai": "py -3.13 -m uvicorn app:app --app-dir ai-worker --host 127.0.0.1 --port 5051 --reload",
+    "start:backend": "npm start --prefix backend",
+    "dev": "npm run dev:backend"
+  }
+}

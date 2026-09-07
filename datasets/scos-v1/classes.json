@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "format": "scos-bbox-v1",
+  "yolo_compatible": true,
+  "classes": [
+    {
+      "id": 0,
+      "name": "red",
+      "color": "#e74c3c"
+    },
+    {
+      "id": 1,
+      "name": "yellow",
+      "color": "#f1c40f"
+    },
+    {
+      "id": 2,
+      "name": "green",
+      "color": "#27ae60"
+    },
+    {
+      "id": 3,
+      "name": "brown",
+      "color": "#8B4513"
+    },
+    {
+      "id": 4,
+      "name": "blue",
+      "color": "#3498db"
+    },
+    {
+      "id": 5,
+      "name": "pink",
+      "color": "#ff69b4"
+    },
+    {
+      "id": 6,
+      "name": "black",
+      "color": "#1a1a1a"
+    },
+    {
+      "id": 7,
+      "name": "cue_ball",
+      "color": "#ecf0f1"
+    }
+  ],
+  "note": "Manual bounding-box labels. Export writes YOLO txt beside images."
+}

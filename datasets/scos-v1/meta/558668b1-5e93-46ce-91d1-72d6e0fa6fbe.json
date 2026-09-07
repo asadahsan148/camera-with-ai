@@ -1,0 +1,32 @@
+{
+  "image_id": "558668b1-5e93-46ce-91d1-72d6e0fa6fbe",
+  "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+  "camera_name": "Table 1",
+  "camera_key": "192.168.1.14|ch2",
+  "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+  "table_name": "Table 1",
+  "timestamp": "2026-09-05T18:58:30.380Z",
+  "original_resolution": {
+    "width": 960,
+    "height": 1080
+  },
+  "perspective_output_resolution": {
+    "width": 1320,
+    "height": 720
+  },
+  "calibration_id": "2026-09-05T18:20:26.983Z",
+  "calibration_timestamp": "2026-09-05T18:20:26.983Z",
+  "surface_width": 1200,
+  "aspect": 2,
+  "margin": 0.1,
+  "output_width": 1320,
+  "output_height": 720,
+  "timings_ms": {
+    "decode": 32.49,
+    "transform": 20.552,
+    "encode": 25.9,
+    "total": 78.95
+  },
+  "phash": "00f00ffe7fe17ff17ff47ff8fff8fff8fff8fff87ff07f787f887f8000000000",
+  "bytes": 64035
+}

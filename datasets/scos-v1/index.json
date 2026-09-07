@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "name": "scos-v1",
+  "created_at": "2026-09-05T18:36:31.623Z",
+  "updated_at": "2026-09-05T19:02:52.393Z",
+  "images": [
+    {
+      "image_id": "558668b1-5e93-46ce-91d1-72d6e0fa6fbe",
+      "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+      "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+      "camera_name": "Table 1",
+      "table_name": "Table 1",
+      "timestamp": "2026-09-05T18:58:30.380Z",
+      "annotated": false,
+      "box_count": 0,
+      "bytes": 64035,
+      "phash": "00f00ffe7fe17ff17ff47ff8fff8fff8fff8fff87ff07f787f887f8000000000",
+      "width": 1320,
+      "height": 720
+    },
+    {
+      "image_id": "d2113da9-93b5-4863-8852-0353d9b466a4",
+      "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+      "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+      "camera_name": "Table 1",
+      "table_name": "Table 1",
+      "timestamp": "2026-09-05T19:02:28.625Z",
+      "annotated": false,
+      "box_count": 0,
+      "bytes": 62372,
+      "phash": "00200fff7fc07fe17fe07ff0fff0fff0fff0fff07fe07fe07fc06f8000060000",
+      "width": 1320,
+      "height": 720
+    },
+    {
+      "image_id": "5dffe3fa-bad7-493f-b2d0-08a8223c7091",
+      "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+      "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+      "camera_name": "Table 1",
+      "table_name": "Table 1",
+      "timestamp": "2026-09-05T19:02:32.074Z",
+      "annotated": false,
+      "box_count": 0,
+      "bytes": 64504,
+      "phash": "002007fe7fc17ff17ff07ff0fff8fff8fff0fff07ff07fe07fc06f8002060000",
+      "width": 1320,
+      "height": 720
+    },
+    {
+      "image_id": "98e9e58b-6609-4f2a-9dec-05fb7bba68bb",
+      "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+      "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+      "camera_name": "Table 1",
+      "table_name": "Table 1",
+      "timestamp": "2026-09-05T19:02:41.670Z",
+      "annotated": false,
+      "box_count": 0,
+      "bytes": 57822,
+      "phash": "00200fff7fc17fe07fe07ffffffdfff0fff0fff07ff07fe07fc03f8000060000",
+      "width": 1320,
+      "height": 720
+    },
+    {
+      "image_id": "f3c8cd65-1e74-4566-8228-5723b21e7751",
+      "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+      "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+      "camera_name": "Table 1",
+      "table_name": "Table 1",
+      "timestamp": "2026-09-05T19:02:46.537Z",
+      "annotated": false,
+      "box_count": 0,
+      "bytes": 60155,
+      "phash": "00200fff7f817ff17ff07ffcfffbfff0fff0fff07ff07fe07fc07f8000060000",
+      "width": 1320,
+      "height": 720
+    },
+    {
+      "image_id": "5cf742d8-26a1-40bb-bffd-1e5de6cd386d",
+      "table_id": "dfae0a85-f83b-4dd3-af2a-ab7e5082c7ed",
+      "camera_id": "085ad49c-2646-4738-89eb-8259491d1c64",
+      "camera_name": "Table 1",
+      "table_name": "Table 1",
+      "timestamp": "2026-09-05T19:02:52.364Z",
+      "annotated": false,
+      "box_count": 0,
+      "bytes": 58703,
+      "phash": "00200fff7fc17fe17ff07fe6fff3fff0fff0ffe07fe07fe07fc07fc000060000",
+      "width": 1320,
+      "height": 720
+    }
+  ]
+}

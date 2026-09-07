@@ -1,0 +1,17 @@
+{
+  "name": "camera-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2",
+    "onvif": "^0.8.1",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.1"
+  }
+}

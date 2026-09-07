@@ -1,0 +1,19 @@
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+frontend/dist/
+backend/data/local-credentials.json
+backend/data/*.tmp
+backend/.env
+*.log
+__pycache__/
+.ai-worker/__pycache__/
+
+# Large model files - download separately
+*.pt
+
+# Video files
+*.mp4
+
+# Reference/third-party projects
+ai-worker/_ref/

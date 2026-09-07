@@ -1,0 +1,7 @@
+path: C:\Users\ADMIN\OneDrive\Desktop\Personal_project\pool
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 16
+names: ['0', '1', '10', '11', '12', '13', '14', '15', '2', '3', '4', '5', '6', '7', '8', '9']
