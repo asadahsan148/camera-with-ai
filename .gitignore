@@ -9,11 +9,5 @@ backend/.env
 __pycache__/
 .ai-worker/__pycache__/
 
-# Large model files - download separately
-*.pt
-
-# Video files
-*.mp4
-
-# Reference/third-party projects
-ai-worker/_ref/
+# HuggingFace download cache
+ai-worker/pool_dataset/.cache/

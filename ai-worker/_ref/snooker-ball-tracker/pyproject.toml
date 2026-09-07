@@ -1,0 +1,73 @@
+[tool.poetry]
+name = "snooker_ball_tracker"
+version = "0.1.0"
+description = "Demo app that tracks balls on a Snooker table"
+authors = ["dcrblack <danielcrblack@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.scripts]
+sbt-video = 'snooker_ball_tracker.gui:main'
+sbt-image = "snooker_ball_tracker.cli:main"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.9"
+numpy = "^1.22.0"
+imutils = "^0.5.4"
+python-magic = "^0.4.24"
+PyQt5 = "5.14.1"
+opencv-python = "4.5.2.52"
+python-magic-bin = {version = "0.4.14", platform = "win32"}
+
+[tool.poetry.dev-dependencies]
+tomlkit = "^0.7.2"
+pyinstaller = "^4.5.1"
+pyinstaller-versionfile = "^2.0.0"
+mypy = "^0.931"
+PyQt5-stubs = "^5.15.2"
+black = "^22.1.0"
+isort = "^5.10.1"
+flake8 = "^4.0.1"
+pre-commit = "^2.17.0"
+future = "0.18.3"
+
+[tool.mypy]
+python_version = "3.8"
+cache_dir = ".mypy_cache"
+exclude = "tests"
+files = "src, build.py"
+strict = true
+namespace_packages = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = "snooker_ball_tracker.views.*"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = [
+  "PyInstaller.*",
+  "pyinstaller_versionfile.*",
+  "imutils.*",
+  "cv2.*",
+]
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+exclude = '''
+(
+  /(
+    \.git
+    | \.venv
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
